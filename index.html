@@ -16,6 +16,14 @@
   <script>
     var map;
 
+    var restaurants = [
+        {name: 'Chez Simone', location: {lat:48.8603937, lng: 2.3430545}},
+        {name: 'Cafe Coutume', location: {lat:48.851599, lng: 2.3162123}},
+        {name: 'Café Pinson', location: {lat:48.863732, lng: 2.3631037}},
+        {name: 'Sol Semilla', location: {lat:48.8730959, lng: 2.363135900000001}},
+        {name: 'Juice Lab Marais', location: {lat:48.8563595, lng: 2.3637123}}
+    ];
+
     // initalize map function
     function initMap(){
       var paris = {lat:48.86064200000001, lng: 2.352245};
@@ -25,16 +33,17 @@
       });
     }
 
-    function addMarker(){
-      var restaurant = {lat:48.8603937, lng: 2.3430545};
-      var marker = new google.maps.Marker({
-        position: restaurant,
-        map: map
-      });
+    function addMarkers(){
+      for(i=0; i < restaurants.length; i++){
+        var marker = new google.maps.Marker({
+          position: restaurants[i].location,
+          map: map
+        });
+      }
     }
 
     //call initMap function
     initMap();
-    addMarker();
+    addMarkers();
   </script>
 </html>
