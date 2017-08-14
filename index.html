@@ -31,7 +31,6 @@
         {name: 'Juice Lab Marais', location: {lat:48.8563595, lng: 2.3637123}}
     ];
 
-  
     //viewModel
     var viewModel = function(){
       var self = this;
@@ -47,6 +46,7 @@
       });
     }
 
+    // add restaurants to map and list
     function addRestaurants(){
       for(i=0; i < restaurants.length; i++){
         var marker = new google.maps.Marker({
@@ -58,7 +58,9 @@
 
     //call initMap function
     initMap();
+    // apply knockout bindings
     ko.applyBindings(new viewModel());
+    // call add restaurants function
     addRestaurants();
   </script>
 </html>
