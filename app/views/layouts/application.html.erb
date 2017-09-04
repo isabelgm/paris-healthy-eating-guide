@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Paris Healthy Eating Guide</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+  <!-- Call google maps API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkSk0oNFAPb_8hOoC6zgmIHP6Tc0R-NS8&v=3"></script>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</html>
