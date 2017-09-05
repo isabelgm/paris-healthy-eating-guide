@@ -70,3 +70,18 @@ var viewModel = function(){
 
 //call initMap function
 initMap();
+
+$("#example").on("click", function(){
+    console.log("I was clicked");
+    $.ajax({
+      url : '/restaurants/' + '330401513786136',
+      type : 'GET',
+      dataType:'json',
+      success : function(data) {
+          console.log(data);
+      },
+      error : function(request, error) {
+        console.log(error);
+      }
+    });
+});
