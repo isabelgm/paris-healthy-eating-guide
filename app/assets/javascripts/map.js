@@ -55,7 +55,7 @@ var viewModel = function(){
 
     populateInfoWindow(restaurant.marker, infowindow);
 
-    // Populate info window when a marker is clicked
+    // Open info window when marker is clicked
     restaurant.marker.addListener('click', function(){
       infowindow.open(map, this);
     });
