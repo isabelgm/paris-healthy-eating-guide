@@ -39,6 +39,7 @@ var viewModel = function(){
       position: position,
       map: map,
       name: restaurant.name,
+      id: restaurant.id,
       animation: google.maps.Animation.DROP
     });
 
@@ -48,7 +49,24 @@ var viewModel = function(){
     // Populate info window when a marker is clicked
     restaurant.marker.addListener('click', function(){
       populateInfoWindow(this, infowindow);
+      getFacebookInfo(this.id);
     });
+
+    // Get data from Facebook Graph API
+    function getFacebookInfo(restaurant_id){
+      console.log("I'm getting Facebook info");
+      $.ajax({
+        url : '/restaurants/' + restaurant_id,
+        type : 'GET',
+        dataType:'json',
+        success : function(data) {
+            console.log(data);
+        },
+        error : function(request, error) {
+          console.log(error);
+        }
+      });
+    }
 
     function populateInfoWindow(marker, infowindow){
       if (infowindow.marker != marker) {
@@ -87,18 +105,3 @@ var viewModel = function(){
 
 //call initMap function
 initMap();
-
-$("#example").on("click", function(){
-    console.log("I was clicked");
-    $.ajax({
-      url : '/restaurants/' + '330401513786136', 
-      type : 'GET',
-      dataType:'json',
-      success : function(data) {
-          console.log(data);
-      },
-      error : function(request, error) {
-        console.log(error);
-      }
-    });
-});
