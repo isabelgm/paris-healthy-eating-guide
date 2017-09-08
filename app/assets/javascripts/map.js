@@ -53,9 +53,11 @@ var viewModel = function(){
     // Push the marker to array of markers
     markers.push(restaurant.marker);
 
+    populateInfoWindow(restaurant.marker, infowindow);
+
     // Populate info window when a marker is clicked
     restaurant.marker.addListener('click', function(){
-      populateInfoWindow(this, infowindow);
+      infowindow.open(map, this);
     });
   }
 
@@ -64,7 +66,6 @@ var viewModel = function(){
     if (infowindow.marker != marker) {
       infowindow.marker = marker;
       infowindow.setContent('<div>' +  marker.name + '</div>' + '<div>' +  marker.about + '</div>');
-      infowindow.open(map, marker);
     }
   }
 
