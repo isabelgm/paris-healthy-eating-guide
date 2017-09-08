@@ -1,10 +1,10 @@
 // Model
 var restaurants = [
-    {name: 'Chez Simone', location: {lat:48.8603937, lng: 2.3430545}, id:'1550233375271520'},
-    {name: 'Cafe Coutume', location: {lat:48.851599, lng: 2.3162123}, id:'187873637913065'},
-    {name: 'Café Pinson', location: {lat:48.863732, lng: 2.3631037}, id:'138933902926897'},
-    {name: 'Sol Semilla', location: {lat:48.8730959, lng: 2.363135900000001}, id:'339610619423805'},
-    {name: 'Juice Lab Marais', location: {lat:48.8563595, lng: 2.3637123}, id:'330401513786136'}
+    {name: 'Chez Simone', location: {lat:48.8603937, lng: 2.3430545}, about: '', id:'1550233375271520'},
+    {name: 'Cafe Coutume', location: {lat:48.851599, lng: 2.3162123}, about: '', id:'187873637913065'},
+    {name: 'Café Pinson', location: {lat:48.863732, lng: 2.3631037}, about: '', id:'138933902926897'},
+    {name: 'Sol Semilla', location: {lat:48.8730959, lng: 2.363135900000001}, about: '', id:'339610619423805'},
+    {name: 'Juice Lab Marais', location: {lat:48.8563595, lng: 2.3637123}, about: '', id:'330401513786136'}
 ];
 
 var markers = [];
@@ -30,8 +30,14 @@ var viewModel = function(){
   //Stores user input
   self.query = ko.observable('');
 
-  // Go through all restaurants,  add a marker and add it to the markers array
+  // Go through all restaurants and get facebook info,
+  // then create a marker for each one.
   restaurants.forEach(function(restaurant){
+    getFacebookInfo(restaurant);
+  }); // end forEach loop
+
+  // Create a marker on the map for a location
+  function createMarker(restaurant){
     var position = restaurant.location;
     var infowindow = new google.maps.InfoWindow();
 
@@ -40,6 +46,7 @@ var viewModel = function(){
       map: map,
       name: restaurant.name,
       id: restaurant.id,
+      about: restaurant.about,
       animation: google.maps.Animation.DROP
     });
 
@@ -49,34 +56,34 @@ var viewModel = function(){
     // Populate info window when a marker is clicked
     restaurant.marker.addListener('click', function(){
       populateInfoWindow(this, infowindow);
-      getFacebookInfo(this.id);
     });
+  }
 
-    // Get data from Facebook Graph API
-    function getFacebookInfo(restaurant_id){
-      console.log("I'm getting Facebook info");
-      $.ajax({
-        url : '/restaurants/' + restaurant_id,
-        type : 'GET',
-        dataType:'json',
-        success : function(data) {
-            console.log(data);
-        },
-        error : function(request, error) {
-          console.log(error);
-        }
-      });
+  // Populate info window
+  function populateInfoWindow(marker, infowindow){
+    if (infowindow.marker != marker) {
+      infowindow.marker = marker;
+      infowindow.setContent('<div>' +  marker.name + '</div>' + '<div>' +  marker.about + '</div>');
+      infowindow.open(map, marker);
     }
+  }
 
-    function populateInfoWindow(marker, infowindow){
-      if (infowindow.marker != marker) {
-        infowindow.marker = marker;
-        infowindow.setContent('<div>' +  marker.name + '</div>');
-        infowindow.open(map, marker);
+  // Get data from Facebook Graph API and create a marker
+  function getFacebookInfo(restaurant){
+    console.log("I'm getting Facebook info");
+    $.ajax({
+      url : '/restaurants/' + restaurant.id,
+      type : 'GET',
+      dataType:'json',
+      success : function(data) {
+          restaurant.about = data.about;
+          createMarker(restaurant);
+      },
+      error : function(request, error) {
+        console.log(error);
       }
-    }
-
-  }); // end forEach loop
+    });
+  }
 
   // Filters through observableArray and shows results that match the query
   self.search = ko.computed(function(){
