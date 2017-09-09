@@ -76,10 +76,7 @@ var viewModel = function(){
 
   // Open the restaurant marker when list item is clicked
   openRestaurantMarkerFromList =  function(restaurant){
-    var current_restaurant = restaurant;
-    var marker = current_restaurant.marker;
-    var infowindow = current_restaurant.infowindow;
-    infowindow.open(map, marker);
+    restaurant.infowindow.open(map, restaurant.marker);
   }
 
   // Get data from Facebook Graph API and create a marker
