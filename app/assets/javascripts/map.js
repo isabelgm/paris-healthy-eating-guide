@@ -53,12 +53,17 @@ var viewModel = function(){
     // Push the marker to array of markers
     markers.push(restaurant.marker);
 
+    // Call populateInfoWindow function
     populateInfoWindow(restaurant.marker, infowindow);
 
     // Open info window when marker is clicked
     restaurant.marker.addListener('click', function(){
       infowindow.open(map, this);
     });
+
+    // Add infowindow as a property to restaurant
+    // this makes it available for use outside this function.
+    restaurant.infowindow = infowindow;
   }
 
   // Populate info window
@@ -67,6 +72,14 @@ var viewModel = function(){
       infowindow.marker = marker;
       infowindow.setContent('<div>' +  marker.name + '</div>' + '<div>' +  marker.about + '</div>');
     }
+  }
+
+  // Open the restaurant marker when list item is clicked
+  openRestaurantMarkerFromList =  function(restaurant){
+    var current_restaurant = restaurant;
+    var marker = current_restaurant.marker;
+    var infowindow = current_restaurant.infowindow;
+    infowindow.open(map, marker);
   }
 
   // Get data from Facebook Graph API and create a marker
