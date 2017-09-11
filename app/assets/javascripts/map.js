@@ -15,7 +15,23 @@ function initMap(){
   var paris = {lat:48.8554235, lng: 2.3427983};
   map = new google.maps.Map(document.getElementById('map'),{
     zoom: 13,
-    center: paris
+    center: paris,
+    styles: [
+      {
+        featureType: 'water',
+        elementType: 'geometry.fill',
+        stylers: [{color: '#92B5D9'}]
+      },
+      {
+        featureType: 'poi.business',
+        stylers: [{visibility: 'off'}]
+      },
+      {
+        featureType: 'road.highway',
+        elementType: 'labels',
+        stylers: [{visibility: 'off'}]
+      }
+    ]
   });
 
   // apply knockout bindings
@@ -39,11 +55,14 @@ var viewModel = function(){
   // Create a marker on the map for a location
   function createMarker(restaurant){
     var position = restaurant.location;
-    var infowindow = new google.maps.InfoWindow();
+    var infowindow = new google.maps.InfoWindow({
+      maxWidth: 200
+    });
 
     restaurant.marker = new google.maps.Marker({
       position: position,
       map: map,
+      icon: pinSymbol('#CD212A'),
       name: restaurant.name,
       id: restaurant.id,
       about: restaurant.about,
@@ -70,8 +89,24 @@ var viewModel = function(){
   function populateInfoWindow(marker, infowindow){
     if (infowindow.marker != marker) {
       infowindow.marker = marker;
-      infowindow.setContent('<div>' +  marker.name + '</div>' + '<div>' +  marker.about + '</div>');
+      infowindow.setContent('<div>' +
+      '<p class="marker-name">'+ marker.name + '</p>'
+      + '<p class="marker-description">'+  marker.about + '</p>'
+      +'</div>');
     }
+  }
+
+  //
+  function pinSymbol(color) {
+    return {
+        path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
+        fillColor: color,
+        fillOpacity: 1,
+        strokeColor: '#CD212A',
+        strokeWeight: 1,
+        scale: 1,
+        labelOrigin: new google.maps.Point(0,-29)
+    };
   }
 
   // Open the restaurant marker when list item is clicked
