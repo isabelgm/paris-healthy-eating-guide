@@ -43,7 +43,7 @@ var viewModel = function(){
   var self = this;
   self.restaurantList = ko.observableArray(restaurants);
 
-  //Stores user input
+  // Store user input
   self.query = ko.observable('');
 
   // Go through all restaurants and get facebook info,
@@ -75,7 +75,7 @@ var viewModel = function(){
     // Call populateInfoWindow function
     populateInfoWindow(restaurant.marker, infowindow);
 
-    // Open info window when marker is clicked
+    // Open infowindow when marker is clicked
     restaurant.marker.addListener('click', function(){
       infowindow.open(map, this);
     });
@@ -97,7 +97,7 @@ var viewModel = function(){
     }
   }
 
-  //
+  // Create pin for google map marker
   function pinSymbol(color) {
     return {
         path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
@@ -117,7 +117,6 @@ var viewModel = function(){
 
   // Get data from Facebook Graph API and create a marker
   function getFacebookInfo(restaurant){
-    console.log("I'm getting Facebook info");
     $.ajax({
       url : '/restaurants/' + restaurant.id,
       type : 'GET',
@@ -132,7 +131,7 @@ var viewModel = function(){
     });
   }
 
-  // Filters through observableArray and shows results that match the query
+  // Filter through observableArray and show results that match the query
   self.search = ko.computed(function(){
     var query = this.query().toLowerCase();
     if(!query) {
