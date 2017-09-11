@@ -63,14 +63,19 @@ input::selection {
   margin: 2rem;
 }
 
-.marker-name {
-  color: black;
-  font-weight: bold;
-  margin-bottom: 0.25rem;
-}
-
 hr {
   width: 20%;
   text-align: center;
   border: 2px solid black;
+}
+
+// Infowindow
+.marker-name {
+  color: black;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.infowindow {
+  font-family: 'Work Sans', sans-serif;
 }

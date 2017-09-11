@@ -89,7 +89,7 @@ var viewModel = function(){
   function populateInfoWindow(marker, infowindow){
     if (infowindow.marker != marker) {
       infowindow.marker = marker;
-      infowindow.setContent('<div>' +
+      infowindow.setContent('<div class="infowindow">' +
       '<p class="marker-name">'+ marker.name + '</p>'
       + '<p class="marker-description">'+  marker.about + '</p>'
       +'</div>');
