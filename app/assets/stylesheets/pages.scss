@@ -5,16 +5,66 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Work Sans', sans-serif;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+li {
+  list-style: none;
+  padding: 1rem 0 1rem 1rem;
 }
 
 #map {
-  height: 80%;
+  height: 100%;
+}
+
+#sidebar {
+  padding: 1rem;
+}
+
+// Tablets + Desktop
+@media(min-width:1093px){
+  #sidebar {
+    width: 30%;
+    height: 100%;
+    float: left;
+    padding: 2rem;
+  }
+
+  #map {
+    height: 100%;
+    width: 70%;
+    float: right;
+  }
 }
 
 #list-item {
   cursor: pointer;
 }
 
-#list-item:hover {
-  font-weight: bold;
+li:hover {
+  background-color: #92B5D9;
+  color: white;
+}
+
+input::selection {
+  border: 1px solid #92B5D9;
+}
+
+.center {
+  text-align: center;
+}
+
+.margin-2 {
+  margin: 2rem;
+}
+
+hr {
+  width: 20%;
+  text-align: center;
+  border: 2px solid black;
 }
