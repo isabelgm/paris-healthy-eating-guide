@@ -127,6 +127,8 @@ var viewModel = function(){
       },
       error : function(request, error) {
         console.log(error);
+        alert("We're having some trouble getting a restaurant's info from Facebook. " +
+        "Please check your internet connection and try refreshing the page.")
       }
     });
   }
