@@ -92,6 +92,7 @@ var viewModel = function(){
       infowindow.setContent('<div class="infowindow">' +
       '<p class="marker-name">'+ marker.name + '</p>'
       + '<p class="marker-description">'+  marker.about + '</p>'
+      + '<p class="small">' + "info provided by restaurants Facebook" + '</p>'
       +'</div>');
     }
   }
