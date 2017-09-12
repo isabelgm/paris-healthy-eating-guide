@@ -62,7 +62,7 @@ var viewModel = function(){
     restaurant.marker = new google.maps.Marker({
       position: position,
       map: map,
-      icon: pinSymbol('#CD212A'),
+      icon: "/assets/default-marker.png",
       name: restaurant.name,
       id: restaurant.id,
       about: restaurant.about,
@@ -75,16 +75,17 @@ var viewModel = function(){
     // Call populateInfoWindow function
     populateInfoWindow(restaurant.marker, infowindow);
 
-    // Open infowindow when marker is clicked
-    restaurant.marker.addListener('click', function(){
-      infowindow.open(map, this);
-    });
-
     // Add infowindow as a property to restaurant
     // this makes it available for use outside this function.
     restaurant.infowindow = infowindow;
-  }
 
+    // Open infowindow when marker is clicked and change pin color
+    restaurant.marker.addListener('click', function(){
+      restaurant.marker.setIcon("/assets/clicked-marker.png");
+      infowindow.open(map, this);
+    });
+  }
+  
   // Populate info window
   function populateInfoWindow(marker, infowindow){
     if (infowindow.marker != marker) {
@@ -95,19 +96,6 @@ var viewModel = function(){
       + '<p class="small">' + "info provided by restaurants Facebook" + '</p>'
       +'</div>');
     }
-  }
-
-  // Create pin for google map marker
-  function pinSymbol(color) {
-    return {
-        path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
-        fillColor: color,
-        fillOpacity: 1,
-        strokeColor: '#CD212A',
-        strokeWeight: 1,
-        scale: 1,
-        labelOrigin: new google.maps.Point(0,-29)
-    };
   }
 
   // Open the restaurant marker when list item is clicked
