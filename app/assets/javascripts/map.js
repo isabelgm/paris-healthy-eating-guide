@@ -62,7 +62,7 @@ var viewModel = function(){
     restaurant.marker = new google.maps.Marker({
       position: position,
       map: map,
-      icon: "/assets/default-marker.png",
+      icon: "/default-marker.png",
       name: restaurant.name,
       id: restaurant.id,
       about: restaurant.about,
@@ -81,11 +81,11 @@ var viewModel = function(){
 
     // Open infowindow when marker is clicked and change pin color
     restaurant.marker.addListener('click', function(){
-      restaurant.marker.setIcon("/assets/clicked-marker.png");
+      restaurant.marker.setIcon("/clicked-marker.png");
       infowindow.open(map, this);
     });
   }
-  
+
   // Populate info window
   function populateInfoWindow(marker, infowindow){
     if (infowindow.marker != marker) {
