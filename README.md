@@ -13,17 +13,17 @@ the Facebook graph api. This is a rails app so you will need rails 5 on your com
 
 1. Clone the repository
 2. Install Rails if you haven't yet:
-`$ gem install rails`
+`$ gem install rails`.
 3. Open the repo
 4. Install the necessary gems by running
-`bundle install` in your terminal
+`bundle install` in your terminal.
 5. Add a file called .env to the repo.
 This should be outside of the app folder but in the directory in to which you downloaded the app.
 6. Add the environment variables and save the file.
-_Note: The enviornment variables are provided to the Udacity reviewer view notes when the project was submitted._
+_Note: The enviornment variables are provided to the Udacity reviewer in the student notes when the project was submitted._
 7. Start the server
-`rails s`
-Go to localhost:3000 to access the app.
+`rails s`.
+8. Go to localhost:3000 to access the app.
 
 ## Resources used for this project
 1. Google maps API
